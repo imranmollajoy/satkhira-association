@@ -8,7 +8,7 @@
 <!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
 
 <div class="container h-full mx-auto px-2">
-	<h1 class="h1 my-8">Satkhira</h1>
+	<h1 class="h1 my-8">Students Association Of Satkhira</h1>
 
 	<!-- <div class="table-container">
 		<table class="table table-hover">
