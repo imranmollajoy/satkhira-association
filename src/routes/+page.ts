@@ -16,7 +16,6 @@ export const load = async ({ setHeaders, url, fetch }) => {
 
 		return yearA - yearB;
 	});
-
 	const kritiStudent = sheetData.filter(
 		(f: { [x: string]: string }) => f['Are you a_____?'] === 'Job Holder'
 	);

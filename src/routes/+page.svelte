@@ -59,52 +59,52 @@
 			<svelte:fragment slot="panel">
 				{#if tabSet === 0}
 					{#each otherStudent as row}
-						<div class="space-y-2 mb-8">
-							{#if row['Upload Image']}
-								<img
-									src="http://drive.google.com/uc?id={row['Upload Image'].split('=')[1]}"
-									alt=""
-								/>
+						<div class="space-y-1 my-8 flex gap-4 flex-col md:flex-row-reverse">
+							{#if row['Upload Image'] && row['Upload Image'].startsWith('http')}
+								<img src="./images/{row.Name}.jpg" alt="" class="max-w-48" />
 							{/if}
-							<h2 class="h2">{row.Name}</h2>
-							<p>{row.Village}, {row.Upazilla}</p>
-							<p><b>Faculty: </b>{row.Faculty} ({row.Session})</p>
-							<p><b>Email: </b>{row.Email}</p>
+							<div class="w-full">
+								<h2 class="h2">{row.Name}</h2>
+								<p>{row.Village}, {row.Upazilla}</p>
+								<p><b>Faculty: </b>{row.Faculty} ({row.Session})</p>
+								<p><b>Email: </b>{row.Email}</p>
 
-							{#if row['Facebook Link']?.startsWith('http')}
-								<p>
-									<a href={row['Facebook Link']}>Facebook↗️</a>
-								</p>
-							{/if}
+								{#if row['Facebook Link']?.startsWith('http')}
+									<p>
+										<a href={row['Facebook Link']}>Facebook↗️</a>
+									</p>
+								{/if}
+							</div>
 						</div>
+						<hr />
 					{/each}
 				{:else if tabSet === 1}
 					{#each kritiStudent as row}
-						<div class="space-y-2 mb-8">
-							{#if row['Upload Image']}
-								<img
-									src="http://drive.google.com/uc?id={row['Upload Image'].split('=')[1]}"
-									alt=""
-								/>
+						<div class="space-y-1 my-8 flex gap-4 flex-col md:flex-row-reverse">
+							{#if row['Upload Image'] && row['Upload Image'].startsWith('http')}
+								<img src="./images/{row.Name}.jpg" alt="" class="max-w-48" />
 							{/if}
-							<h2 class="h2">{row.Name}</h2>
-							<p>{row.Village}, {row.Upazilla}</p>
-							<p><b>Faculty: </b>{row.Faculty} ({row.Session})</p>
-							<p>
-								<b>Profession: </b>
-
-								{#if row['What is your Job Rank?']}
-									{row['What is your Job Rank?']} at {row['Company Or Organiation Name']}
-								{/if}
-							</p>
-							<p><b>Email: </b>{row.Email}</p>
-
-							{#if row['Facebook Link']?.startsWith('http')}
+							<div class="w-full">
+								<h2 class="h2">{row.Name}</h2>
+								<p>{row.Village}, {row.Upazilla}</p>
+								<p><b>Faculty: </b>{row.Faculty} ({row.Session})</p>
 								<p>
-									<a href={row['Facebook Link']}>Facebook↗️</a>
+									<b>Profession: </b>
+
+									{#if row['What is your Job Rank?']}
+										{row['What is your Job Rank?']} at {row['Company Or Organiation Name']}
+									{/if}
 								</p>
-							{/if}
+								<p><b>Email: </b>{row.Email}</p>
+
+								{#if row['Facebook Link']?.startsWith('http')}
+									<p>
+										<a href={row['Facebook Link']}>Facebook↗️</a>
+									</p>
+								{/if}
+							</div>
 						</div>
+						<hr />
 					{/each}
 				{:else if tabSet === 2}
 					No data
