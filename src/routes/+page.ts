@@ -19,12 +19,9 @@ export const load = async ({ setHeaders, url, fetch }) => {
 	const kritiStudent = sheetData.filter(
 		(f: { [x: string]: string }) => f['Are you a_____?'] === 'Job Holder'
 	);
-	const otherStudent = sheetData.filter(
-		(f: { [x: string]: string }) => f['Are you a_____?'] === 'Student'
-	);
 
 	setHeaders({
 		'Cache-Control': `max-age=0, s-maxage=${60 * 60}`
 	});
-	return { sheetData, kritiStudent, otherStudent };
+	return { sheetData, kritiStudent };
 };

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { TabGroup, Tab } from '@skeletonlabs/skeleton';
 	export let data;
-	const { sheetData, kritiStudent, otherStudent } = data;
+	const { sheetData, kritiStudent } = data;
 	let tabSet: number = 0;
 </script>
 
@@ -58,7 +58,7 @@
 			<!-- Tab Panels --->
 			<svelte:fragment slot="panel">
 				{#if tabSet === 0}
-					{#each otherStudent as row}
+					{#each sheetData as row}
 						<div class="space-y-1 my-8 flex gap-4 flex-col md:flex-row-reverse">
 							{#if row['Upload Image'] && row['Upload Image'].startsWith('http')}
 								<img src="./images/{row.Name}.jpg" alt="" class="max-w-48" />
@@ -67,6 +67,13 @@
 								<h2 class="h2">{row.Name}</h2>
 								<p>{row.Village}, {row.Upazilla}</p>
 								<p><b>Faculty: </b>{row.Faculty} ({row.Session})</p>
+
+								{#if row['Are you a_____?'] === 'Job Holder'}
+									<b>Profession: </b>{row['What is your Job Rank?']} at {row[
+										'Company Or Organiation Name'
+									]}
+								{/if}
+
 								<p><b>Email: </b>{row.Email}</p>
 
 								{#if row['Facebook Link']?.startsWith('http')}
