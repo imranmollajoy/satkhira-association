@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { TabGroup, Tab } from '@skeletonlabs/skeleton';
-	export let data;
+	let { data } = $props();
 	const { sheetData, kritiStudent } = data;
-	let tabSet: number = 0;
+	let tabSet: number = $state(0);
 </script>
 
 <!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
@@ -56,67 +56,69 @@
 			<Tab bind:group={tabSet} name="tab2" value={1}>কৃতি শিক্ষার্থী</Tab>
 			<Tab bind:group={tabSet} name="tab3" value={2}>শিক্ষক</Tab>
 			<!-- Tab Panels --->
-			<svelte:fragment slot="panel">
-				{#if tabSet === 0}
-					{#each sheetData as row}
-						<div class="space-y-1 my-8 flex gap-4 flex-col md:flex-row-reverse">
-							{#if row['Upload Image'] && row['Upload Image'].startsWith('http')}
-								<img src="./images/{row.Name}.jpg" alt="" class="max-w-48" />
-							{/if}
-							<div class="w-full">
-								<h2 class="h2">{row.Name}</h2>
-								<p>{row.Village}, {row.Upazilla}</p>
-								<p><b>Faculty: </b>{row.Faculty} ({row.Session})</p>
-
-								{#if row['Are you a_____?'] === 'Job Holder'}
-									<b>Profession: </b>{row['What is your Job Rank?']} at {row[
-										'Company Or Organiation Name'
-									]}
+			{#snippet panel()}
+					
+					{#if tabSet === 0}
+						{#each sheetData as row}
+							<div class="space-y-1 my-8 flex gap-4 flex-col md:flex-row-reverse">
+								{#if row['Upload Image'] && row['Upload Image'].startsWith('http')}
+									<img src="./images/{row.Name}.jpg" alt="" class="max-w-48" />
 								{/if}
+								<div class="w-full">
+									<h2 class="h2">{row.Name}</h2>
+									<p>{row.Village}, {row.Upazilla}</p>
+									<p><b>Faculty: </b>{row.Faculty} ({row.Session})</p>
 
-								<p><b>Email: </b>{row.Email}</p>
-
-								{#if row['Facebook Link']?.startsWith('http')}
-									<p>
-										<a href={row['Facebook Link']}>Facebook↗️</a>
-									</p>
-								{/if}
-							</div>
-						</div>
-						<hr />
-					{/each}
-				{:else if tabSet === 1}
-					{#each kritiStudent as row}
-						<div class="space-y-1 my-8 flex gap-4 flex-col md:flex-row-reverse">
-							{#if row['Upload Image'] && row['Upload Image'].startsWith('http')}
-								<img src="./images/{row.Name}.jpg" alt="" class="max-w-48" />
-							{/if}
-							<div class="w-full">
-								<h2 class="h2">{row.Name}</h2>
-								<p>{row.Village}, {row.Upazilla}</p>
-								<p><b>Faculty: </b>{row.Faculty} ({row.Session})</p>
-								<p>
-									<b>Profession: </b>
-
-									{#if row['What is your Job Rank?']}
-										{row['What is your Job Rank?']} at {row['Company Or Organiation Name']}
+									{#if row['Are you a_____?'] === 'Job Holder'}
+										<b>Profession: </b>{row['What is your Job Rank?']} at {row[
+											'Company Or Organiation Name'
+										]}
 									{/if}
-								</p>
-								<p><b>Email: </b>{row.Email}</p>
 
-								{#if row['Facebook Link']?.startsWith('http')}
-									<p>
-										<a href={row['Facebook Link']}>Facebook↗️</a>
-									</p>
-								{/if}
+									<p><b>Email: </b>{row.Email}</p>
+
+									{#if row['Facebook Link']?.startsWith('http')}
+										<p>
+											<a href={row['Facebook Link']}>Facebook↗️</a>
+										</p>
+									{/if}
+								</div>
 							</div>
-						</div>
-						<hr />
-					{/each}
-				{:else if tabSet === 2}
-					No data
-				{/if}
-			</svelte:fragment>
+							<hr />
+						{/each}
+					{:else if tabSet === 1}
+						{#each kritiStudent as row}
+							<div class="space-y-1 my-8 flex gap-4 flex-col md:flex-row-reverse">
+								{#if row['Upload Image'] && row['Upload Image'].startsWith('http')}
+									<img src="./images/{row.Name}.jpg" alt="" class="max-w-48" />
+								{/if}
+								<div class="w-full">
+									<h2 class="h2">{row.Name}</h2>
+									<p>{row.Village}, {row.Upazilla}</p>
+									<p><b>Faculty: </b>{row.Faculty} ({row.Session})</p>
+									<p>
+										<b>Profession: </b>
+
+										{#if row['What is your Job Rank?']}
+											{row['What is your Job Rank?']} at {row['Company Or Organiation Name']}
+										{/if}
+									</p>
+									<p><b>Email: </b>{row.Email}</p>
+
+									{#if row['Facebook Link']?.startsWith('http')}
+										<p>
+											<a href={row['Facebook Link']}>Facebook↗️</a>
+										</p>
+									{/if}
+								</div>
+							</div>
+							<hr />
+						{/each}
+					{:else if tabSet === 2}
+						No data
+					{/if}
+				
+					{/snippet}
 		</TabGroup>
 	</div>
 </div>
