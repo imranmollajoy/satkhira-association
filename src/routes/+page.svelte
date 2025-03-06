@@ -47,7 +47,7 @@
 		</table>
 	</div> -->
 
-	<div>
+	<div class=" max-w-[768px] mx-auto">
 		<TabGroup>
 			<Tab bind:group={tabSet} name="tab1" value={0}>
 				<!-- <svelte:fragment slot="lead">(icon)</svelte:fragment> -->
@@ -59,59 +59,160 @@
 			{#snippet panel()}
 				{#if tabSet === 0}
 					{#each sheetData as row}
-						<div class="space-y-1 my-8 flex gap-4 flex-col md:flex-row-reverse">
+						<div class="mb-12 flex gap-4 flex-col md:flex-row-reverse">
 							<!-- {#if row['Upload Image'] && row['Upload Image'].startsWith('http')} -->
 							<img src="./images/{row.Name}.jpg" alt="" class="max-w-48" />
 							<!-- {/if} -->
-							<div class="w-full">
+							<div class="w-full space-y-2 lg:space-y-4">
 								<h2 class="h2">{row.Name}</h2>
-								<p>{row.Village}, {row.Upazilla}</p>
-								<p><b>Faculty: </b>{row.Faculty} ({row.Session})</p>
 
 								{#if row['Are you a_____?'] === 'Job Holder'}
-									<b>Profession: </b>{row['What is your Job Rank?']} at {row[
-										'Company Or Organiation Name'
-									]}
+									<h4 class="h4 text-surface-400">
+										{row['What is your Job Rank?']} at {row['Company Or Organiation Name']}
+									</h4>
 								{/if}
+								<p class="flex gap-2">
+									<span>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="24"
+											height="24"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											class="feather feather-book"
+											><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path
+												d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+											></path></svg
+										></span
+									>
+									<span> {row.Faculty} ({row.Session})</span>
+								</p>
 
-								<p><b>Email: </b>{row.Email}</p>
+								<!-- <p>{row.Village}, {row.Upazilla}</p> -->
+								<div>
+									<a href="mailto:{row.Email}" class="btn variant-filled-surface">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="24"
+											height="24"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											class="feather feather-mail mr-2"
+											><path
+												d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+											></path><polyline points="22,6 12,13 2,6"></polyline></svg
+										>
+										Email
+									</a>
 
-								{#if row['Facebook Link']?.startsWith('http')}
-									<p>
-										<a href={row['Facebook Link']}>Facebook↗️</a>
-									</p>
-								{/if}
+									{#if row['Facebook Link']?.startsWith('http')}
+										<a href={row['Facebook Link']} class="btn variant-soft-surface">
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width="24"
+												height="24"
+												viewBox="0 0 24 24"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="2"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												class="feather feather-facebook mr-2"
+												><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+												></path></svg
+											>
+											Facebook
+										</a>
+									{/if}
+								</div>
 							</div>
 						</div>
-						<hr />
 					{/each}
 				{:else if tabSet === 1}
 					{#each kritiStudent as row}
-						<div class="space-y-1 my-8 flex gap-4 flex-col md:flex-row-reverse">
+						<div class="mb-12 flex gap-4 flex-col md:flex-row-reverse">
 							<!-- {#if row['Upload Image'] && row['Upload Image'].startsWith('http')} -->
 							<img src="./images/{row.Name}.jpg" alt="" class="max-w-48" />
 							<!-- {/if} -->
-							<div class="w-full">
+							<div class="w-full space-y-2">
 								<h2 class="h2">{row.Name}</h2>
-								<p>{row.Village}, {row.Upazilla}</p>
-								<p><b>Faculty: </b>{row.Faculty} ({row.Session})</p>
-								<p>
-									<b>Profession: </b>
 
-									{#if row['What is your Job Rank?']}
+								{#if row['Are you a_____?'] === 'Job Holder'}
+									<h4 class="h4 text-surface-400">
 										{row['What is your Job Rank?']} at {row['Company Or Organiation Name']}
-									{/if}
+									</h4>
+								{/if}
+								<p class="flex gap-2">
+									<span>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="24"
+											height="24"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											class="feather feather-book"
+											><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path
+												d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+											></path></svg
+										></span
+									>
+									<span> {row.Faculty} ({row.Session})</span>
 								</p>
-								<p><b>Email: </b>{row.Email}</p>
+
+								<!-- <p>{row.Village}, {row.Upazilla}</p> -->
+
+								<a href="mailto:{row.Email}" class="btn variant-filled-surface">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="24"
+										height="24"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										class="feather feather-mail mr-2"
+										><path
+											d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+										></path><polyline points="22,6 12,13 2,6"></polyline></svg
+									>
+									Email
+								</a>
 
 								{#if row['Facebook Link']?.startsWith('http')}
-									<p>
-										<a href={row['Facebook Link']}>Facebook↗️</a>
-									</p>
+									<a href={row['Facebook Link']} class="btn variant-soft-surface">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="24"
+											height="24"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											class="feather feather-facebook mr-2"
+											><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+											></path></svg
+										>
+										Facebook
+									</a>
 								{/if}
 							</div>
 						</div>
-						<hr />
 					{/each}
 				{:else if tabSet === 2}
 					No data
@@ -120,3 +221,9 @@
 		</TabGroup>
 	</div>
 </div>
+
+<style>
+	svg {
+		stroke-opacity: 0.8;
+	}
+</style>
