@@ -22,7 +22,7 @@
 		const { error } = await supabase.from('notes').insert({ note });
 		if (error) console.error(error);
 
-		invalidate('supabase:db:notes');
+		invalidate('supabase:db:database');
 		form.reset();
 	};
 </script>

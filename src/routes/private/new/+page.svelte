@@ -1,4 +1,9 @@
 <script lang="ts">
+	import type { PageData } from './$types';
+	import { invalidate } from '$app/navigation';
+	let { data }: { data: PageData } = $props();
+	let { database, supabase, user } = $derived(data);
+
 	import {
 		validateYearRange,
 		validateEmail,
@@ -12,16 +17,22 @@
 		email: errorMsgs.email // Stores email validation error
 	});
 
-	function handleSubmit(event: Event) {
+	const handleSubmit: EventHandler<SubmitEvent, HTMLFormElement> = async (event) => {
 		event.preventDefault(); // Prevent form submission
 		if (!event.target) return;
 
 		const form = event.target as HTMLFormElement;
 		// Reset errors and success message
 		errors = { yearRange: '', email: '' };
+		const note = (new FormData(form).get('note') ?? '') as string;
+		if (!note) return;
 
+		const { error } = await supabase.from('database').insert({ formData });
+		if (error) console.error(error);
+
+		invalidate('supabase:db:database');
 		form.reset();
-	}
+	};
 
 	// Reactive statement to check if there are any errors
 	// let isSubmitDisabled = $state(hasErrors(errors));
