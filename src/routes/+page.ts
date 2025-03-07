@@ -16,6 +16,15 @@ export const load = async ({ setHeaders, url, fetch }) => {
 
 		return yearA - yearB;
 	});
+
+	sheetData.forEach((element) => {
+		const wp = element['WhatsApp Number']?.replace(/[^0-9]/g, '');
+		if (wp && wp.startsWith('0')) {
+			element['WhatsApp Number'] = `+88${wp}`;
+		}
+		// now i want to save the element to sheetData
+		sheetData.push(element);
+	});
 	const kritiStudent = sheetData.filter(
 		(f: { [x: string]: string }) => f['Are you a_____?'] === 'Job Holder'
 	);
