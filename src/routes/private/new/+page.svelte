@@ -16,21 +16,19 @@
 		yearRange: errorMsgs.sessionYear, // Stores year range validation error
 		email: errorMsgs.email // Stores email validation error
 	});
-
-	const handleSubmit: EventHandler<SubmitEvent, HTMLFormElement> = async (event) => {
-		event.preventDefault(); // Prevent form submission
-		if (!event.target) return;
-
-		const form = event.target as HTMLFormElement;
-		// Reset errors and success message
-		errors = { yearRange: '', email: '' };
-
-		const { error } = await supabase.from('database').insert({ formData });
-		if (error) console.error(error);
-
-		invalidate('supabase:db:database');
-		form.reset();
-	};
+	let formData = $state({
+		Name: '',
+		Faculty: 'Agriculture',
+		Session: '',
+		Profession: 'Student',
+		JobRank: '',
+		JobOrganization: '',
+		Village: '',
+		Upazilla: '',
+		Email: '',
+		WhatsApp: '',
+		Facebook: ''
+	});
 
 	// Reactive statement to check if there are any errors
 	// let isSubmitDisabled = $state(hasErrors(errors));
@@ -48,19 +46,20 @@
 		'Law and Land Administration',
 		'Nutrition and Food Science'
 	];
-	let formData = $state({
-		Name: '',
-		Faculty: 'Agriculture',
-		Session: '',
-		Profession: 'Student',
-		JobRank: '',
-		JobOrganization: '',
-		Village: '',
-		Upazilla: '',
-		Email: '',
-		WhatsApp: '',
-		Facebook: ''
-	});
+	const handleSubmit: EventHandler<SubmitEvent, HTMLFormElement> = async (event) => {
+		event.preventDefault(); // Prevent form submission
+		if (!event.target) return;
+
+		const form = event.target as HTMLFormElement;
+		// Reset errors and success message
+		errors = { yearRange: '', email: '' };
+
+		const { error } = await supabase.from('database').insert({ ...formData });
+		if (error) console.error(error);
+
+		invalidate('supabase:db:database');
+		form.reset();
+	};
 </script>
 
 <div class="container h-full mx-auto px-2">
@@ -186,7 +185,7 @@
 		<label for="fb" class="label">
 			<span> Facebook: </span>
 			<input
-				type="number"
+				type="text"
 				id="fb"
 				placeholder="Enter Facebook link"
 				class="input"
