@@ -7,6 +7,9 @@
 	let { data } = $props();
 	let { database, supabase, user } = $derived(data);
 
+	import { TableHandler, Datatable, ThSort, ThFilter } from '@vincjo/datatables';
+
+	const table = new TableHandler(database, { rowsPerPage: 10 });
 	const handleSubmit: EventHandler<SubmitEvent, HTMLFormElement> = async (evt) => {
 		evt.preventDefault();
 		if (!evt.target) return;
@@ -24,13 +27,29 @@
 	};
 </script>
 
-<h1>Private page for user: {user?.email}</h1>
+<h1>Hello! {user?.email}</h1>
 <h2>Notes</h2>
-<ul>
-	{#each database as note}
-		<li>{note.Name}</li>
-	{/each}
-</ul>
+
+<Datatable basic {table}>
+	<table>
+		<thead>
+			<tr>
+				<ThSort {table} field="name">Name</ThSort>
+				<ThSort {table} field="last_name">Session</ThSort>
+				<ThSort {table} field="edit">Edit</ThSort>
+			</tr>
+		</thead>
+		<tbody>
+			{#each table.rows as row}
+				<tr>
+					<td>{row.Name}</td>
+					<td>{row.Session}</td>
+					<td><button>Edit</button></td>
+				</tr>
+			{/each}
+		</tbody>
+	</table>
+</Datatable>
 <form onsubmit={handleSubmit}>
 	<label>
 		Add a note

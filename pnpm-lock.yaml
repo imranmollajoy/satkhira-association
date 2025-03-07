@@ -48,6 +48,9 @@ importers:
       '@types/node':
         specifier: 22.13.8
         version: 22.13.8
+      '@vincjo/datatables':
+        specifier: ^2.5.0
+        version: 2.5.0(svelte@5.21.0)
       autoprefixer:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.5.3)
@@ -592,6 +595,11 @@ packages:
   '@typescript-eslint/visitor-keys@8.25.0':
     resolution: {integrity: sha512-kCYXKAum9CecGVHGij7muybDfTS2sD3t0L4bJsEZLkyrXUImiCTq1M3LG2SRtOhiHFwMR9wAFplpT6XHYjTkwQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@vincjo/datatables@2.5.0':
+    resolution: {integrity: sha512-DvlgTmjRFnzIQwIx883+B+66OFnHriMLLh9493QiduWyNtidhYADyyVwlrtcCRH4p+oYL4L9qM1sTLlARzNMxA==}
+    peerDependencies:
+      svelte: ^5.16.0
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -2064,6 +2072,10 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.25.0
       eslint-visitor-keys: 4.2.0
+
+  '@vincjo/datatables@2.5.0(svelte@5.21.0)':
+    dependencies:
+      svelte: 5.21.0
 
   acorn-jsx@5.3.2(acorn@8.14.0):
     dependencies:
