@@ -24,8 +24,6 @@
 		const form = event.target as HTMLFormElement;
 		// Reset errors and success message
 		errors = { yearRange: '', email: '' };
-		const note = (new FormData(form).get('note') ?? '') as string;
-		if (!note) return;
 
 		const { error } = await supabase.from('database').insert({ formData });
 		if (error) console.error(error);
@@ -139,7 +137,7 @@
 		<label for="village" class="label">
 			<span> Village: </span>
 			<input
-				type="number"
+				type="text"
 				id="village"
 				placeholder="Village name"
 				class="input"
@@ -149,7 +147,7 @@
 		<label for="upazilla" class="label">
 			<span> Upazilla: </span>
 			<input
-				type="number"
+				type="text"
 				id="upazilla"
 				placeholder="Upazilla name"
 				class="input"
@@ -198,6 +196,4 @@
 		<button type="submit" disabled={isSubmitDisabled} class="btn variant-filled mt-4">Submit</button
 		>
 	</form>
-
-	{@html JSON.stringify(formData)}
 </div>
